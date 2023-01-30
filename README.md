@@ -76,3 +76,15 @@ const App = ({Component, pageProps}: AppProps) => {
 
 export default App;
 ```
+
+## 주요사항
+### `_app.tsx`
+* 공통 레이아웃, 전역 CSS 디자인 커스터마이징
+* props
+  * Component: 현재 페이지
+  * pageProps: DataFatching 메서드로 미리 가져온 초기 객체, getInitialProps, getStaticProps, getServerSideProps 중 하나
+
+### `_document.tsx`
+* HTML 문서(document) 커스터마이징
+  * head, meta, font, 웹 접근성, body 등 설정
+  * _document.tsx는 _app.tsx 다음에 실행
