@@ -1,19 +1,20 @@
 import Head from 'next/head'
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 
 const HomePage = () => {
-    let user;
+    const [user, setUser] = useState(null);
     useEffect(() => {
-        const fetchUser = async () => {
-            const res = await fetch('http://localhost:3000/api/user')
-            const data = await res.json();
-            console.log(data);
-            return data;
+        async function fetchUser() {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/`);
+            return await res.json();
         }
-        user = fetchUser();
-    }, []);
 
-    console.log(user);
+        fetchUser()
+            .then(response => {
+                console.log(response)
+                setUser(response);
+            });
+    }, []);
 
     return (
         <div>
