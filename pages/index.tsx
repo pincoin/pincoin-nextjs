@@ -1,20 +1,22 @@
 import Head from 'next/head'
 import {useEffect, useState} from 'react';
+import axios from 'axios';
 
 const HomePage = () => {
     const [user, setUser] = useState(null);
     useEffect(() => {
         async function fetchUser() {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/`);
-            return await res.json();
+            const {data} = await axios.post(
+                process.env.NEXT_PUBLIC_API_URL + "/api/user",
+                {},
+            );
+            setUser(data);
         }
 
-        fetchUser()
-            .then(response => {
-                console.log(response)
-                setUser(response);
-            });
+        fetchUser();
     }, []);
+
+    console.log(user);
 
     return (
         <div>
