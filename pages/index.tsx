@@ -5,21 +5,21 @@ import axios from 'axios';
 const HomePage = () => {
     const [user, setUser] = useState(null);
     useEffect(() => {
-        async function fetchUser() {
-            const {data} = await axios.post(
-                process.env.NEXT_PUBLIC_API_URL + "/api/user",
+        async function fetchUsers() {
+            const {data} = await axios.get(
+                process.env.NEXT_PUBLIC_API_URL + "/auth/users",
                 {},
             );
             setUser(data);
         }
 
-        fetchUser();
+        fetchUsers();
     }, []);
 
     console.log(user);
 
     return (
-        <div>
+        <>
             <Head>
                 <title>대한민국 1등 온라인상품권쇼핑몰 :: 핀코인</title>
                 <meta name="description" itemProp="description" content="포스트 내용"/>
@@ -32,7 +32,7 @@ const HomePage = () => {
             <h1 className="text-3xl font-bold underline">
                 Hello world!
             </h1>
-        </div>);
+        </>);
 }
 
 export default HomePage;
